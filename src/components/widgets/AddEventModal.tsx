@@ -146,7 +146,7 @@ export function AddEventModal({ isOpen, onClose, onSave, event, isEditMode = fal
                     type="text"
                     value={formData.title}
                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 bg-white placeholder-gray-500"
                     placeholder="Enter event title"
                     required
                   />
@@ -160,7 +160,7 @@ export function AddEventModal({ isOpen, onClose, onSave, event, isEditMode = fal
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                     rows={3}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 bg-white placeholder-gray-500"
                     placeholder="Enter event description"
                   />
                 </div>
@@ -185,7 +185,7 @@ export function AddEventModal({ isOpen, onClose, onSave, event, isEditMode = fal
                         associatedEntityId: '' // Reset entity selection when type changes
                       });
                     }}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 bg-white"
                   >
                     <option value={EntityType.PLATFORM}>Platform</option>
                     <option value={EntityType.PRODUCT}>Product</option>
@@ -200,7 +200,7 @@ export function AddEventModal({ isOpen, onClose, onSave, event, isEditMode = fal
                   <select
                     value={formData.associatedEntityId}
                     onChange={(e) => setFormData({ ...formData, associatedEntityId: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 bg-white"
                   >
                     <option value="">No entity association</option>
                     {entitiesForSelectedType.map((entity) => (
@@ -224,7 +224,7 @@ export function AddEventModal({ isOpen, onClose, onSave, event, isEditMode = fal
                   <select
                     value={formData.type}
                     onChange={(e) => setFormData({ ...formData, type: e.target.value as EventType })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 bg-white"
                   >
                     <option value={EventType.INTERNAL_AUDIT}>Internal Audit</option>
                     <option value={EventType.HORIZONTAL_AUDIT}>Horizontal Audit</option>
@@ -243,7 +243,7 @@ export function AddEventModal({ isOpen, onClose, onSave, event, isEditMode = fal
                   <select
                     value={formData.priority}
                     onChange={(e) => setFormData({ ...formData, priority: e.target.value as EventPriority })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 bg-white"
                   >
                     <option value={EventPriority.LOW}>Low</option>
                     <option value={EventPriority.MEDIUM}>Medium</option>
@@ -259,7 +259,7 @@ export function AddEventModal({ isOpen, onClose, onSave, event, isEditMode = fal
                   <select
                     value={formData.status}
                     onChange={(e) => setFormData({ ...formData, status: e.target.value as EventStatus })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 bg-white"
                   >
                     <option value={EventStatus.SCHEDULED}>Scheduled</option>
                     <option value={EventStatus.IN_PROGRESS}>In Progress</option>
@@ -357,7 +357,7 @@ export function AddEventModal({ isOpen, onClose, onSave, event, isEditMode = fal
                     type="datetime-local"
                     value={formData.startDate}
                     onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 bg-white"
                     required
                   />
                 </div>
@@ -370,7 +370,7 @@ export function AddEventModal({ isOpen, onClose, onSave, event, isEditMode = fal
                     type="datetime-local"
                     value={formData.endDate}
                     onChange={(e) => setFormData({ ...formData, endDate: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 bg-white"
                   />
                 </div>
               </div>

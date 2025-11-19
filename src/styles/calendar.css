@@ -1,221 +1,84 @@
-/* TRC Calendar Styles */
+/* TRC Calendar Styles (conservative, non-invasive)
+   Restored to a minimal set of rules focused on layout and readability.
+   Avoids aggressive color/position overrides that might impact modals or global text.
+*/
+
 .trc-calendar {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   height: 100% !important;
   max-height: 100% !important;
-  overflow: hidden !important;
 }
 
-/* Calendar container height management */
 .trc-calendar .rbc-calendar {
   height: 100% !important;
   max-height: 100% !important;
-  overflow: hidden !important;
 }
 
-/* Ensure calendar views respect container height */
+/* Keep views contained but don't force absolute positioning */
 .trc-calendar .rbc-month-view,
 .trc-calendar .rbc-time-view,
 .trc-calendar .rbc-agenda-view {
   height: 100% !important;
   max-height: 100% !important;
-  overflow: hidden !important;
 }
 
-/* Make sure the calendar content areas are scrollable within bounds */
-.trc-calendar .rbc-time-content {
-  max-height: 100% !important;
-  overflow-y: auto !important;
+/* Month table layout */
+.trc-calendar .rbc-month-view table {
+  width: 100%;
+  table-layout: fixed;
 }
 
-.trc-calendar .rbc-agenda-content {
-  max-height: 100% !important;
-  overflow-y: auto !important;
+.trc-calendar .rbc-month-view tbody tr {
+  min-height: 100px;
 }
 
-/* Custom toolbar styling */
-.trc-calendar-toolbar {
-  background-color: #f9fafb;
-  border-bottom: 1px solid #e5e7eb;
-  padding: 16px;
+.trc-calendar .rbc-month-view tbody td {
+  vertical-align: top;
+  padding: 8px;
 }
 
-/* Event styling improvements */
+/* Keep event visuals light and let eventPropGetter supply colors */
 .trc-calendar .rbc-event {
-  font-size: 13px !important;
-  font-weight: 600 !important;
-  padding: 4px 6px !important;
-  margin: 1px !important;
-  min-height: 24px !important;
-  line-height: 1.2 !important;
-  border-radius: 6px !important;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
-  cursor: pointer !important;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1) !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-  white-space: nowrap !important;
+  font-size: 13px;
+  padding: 4px 6px;
+  border-radius: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-/* Hover effect for events */
-.trc-calendar .rbc-event:hover {
-  transform: translateY(-1px) !important;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
-  z-index: 100 !important;
-}
-
-/* Selected event styling */
-.trc-calendar .rbc-event.rbc-selected {
-  box-shadow: 0 0 0 2px #3b82f6 !important;
-}
-
-/* Month view event improvements */
-.trc-calendar .rbc-month-view .rbc-event {
-  border-radius: 4px !important;
-  padding: 2px 4px !important;
-  font-size: 12px !important;
-  min-height: 20px !important;
-}
-
-/* Week and day view improvements */
-.trc-calendar .rbc-time-view .rbc-event {
-  border-radius: 6px !important;
-  padding: 4px 6px !important;
-  min-height: 28px !important;
-  font-size: 13px !important;
-}
-
-/* Day view specific improvements */
-.trc-calendar .rbc-day-view .rbc-event {
-  margin-right: 2px !important;
-  margin-left: 2px !important;
-  min-height: 32px !important;
-  font-size: 14px !important;
-  font-weight: 600 !important;
-}
-
-/* Time column styling for day view */
-.trc-calendar .rbc-time-column .rbc-timeslot-group {
-  min-height: 48px !important;
-}
-
-/* Day view time gutter */
-.trc-calendar .rbc-day-view .rbc-time-gutter .rbc-timeslot-group {
-  border-bottom: 1px solid #e5e7eb !important;
-}
-
-/* Day view event area */
-.trc-calendar .rbc-day-view .rbc-events-container {
-  margin-right: 10px !important;
-}
-
-/* Overlapping events handling */
-.trc-calendar .rbc-event-overlaps {
-  margin-right: 10px !important;
-}
-
-/* Calendar cell improvements */
-.trc-calendar .rbc-time-slot {
-  border-bottom: 1px solid #e5e7eb !important;
-}
-
-.trc-calendar .rbc-day-slot .rbc-time-slot {
-  border-bottom: 1px solid #f3f4f6 !important;
-}
-
-/* Header styling */
-.trc-calendar .rbc-header {
-  background-color: #f9fafb !important;
-  border-bottom: 2px solid #e5e7eb !important;
-  font-weight: 600 !important;
-  padding: 8px !important;
-}
-
-/* Today highlighting */
-.trc-calendar .rbc-today {
-  background-color: #eff6ff !important;
-}
-
-/* Month view date styling */
+/* Date numbers */
 .trc-calendar .rbc-date-cell {
-  text-align: right !important;
-  padding: 5px !important;
-  font-weight: 500 !important;
+  text-align: right;
+  padding: 6px;
 }
 
-.trc-calendar .rbc-date-cell.rbc-off-range {
-  color: #9ca3af !important;
+.trc-calendar .rbc-date-cell .rbc-button-link {
+  color: #111827; /* gray-900 */
+  font-weight: 600;
 }
 
-/* Time gutter styling */
-.trc-calendar .rbc-time-gutter .rbc-time-slot {
-  font-size: 12px !important;
-  color: #6b7280 !important;
-  text-align: right !important;
-  padding-right: 8px !important;
+.trc-calendar .rbc-date-cell.rbc-off-range .rbc-button-link {
+  color: #9ca3af; /* gray-400 */
 }
 
-/* Loading state */
-.trc-calendar.loading {
-  opacity: 0.6;
-  pointer-events: none;
+/* Today */
+.trc-calendar .rbc-today {
+  background-color: #f1f5f9;
 }
 
-/* Event content truncation for long titles */
-.trc-calendar .rbc-event-content {
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-  white-space: nowrap !important;
+/* Show-more button style */
+.trc-calendar .rbc-month-view .rbc-show-more {
+  background: transparent;
+  color: #374151;
 }
 
-/* Multi-day event styling */
-.trc-calendar .rbc-event.rbc-event-continues-prior,
-.trc-calendar .rbc-event.rbc-event-continues-after {
-  border-radius: 0 !important;
+/* Ensure month view event containers allow visible overflow */
+.trc-calendar .rbc-month-view .rbc-row-content,
+.trc-calendar .rbc-month-view .rbc-row-segment {
+  overflow: visible;
 }
 
-.trc-calendar .rbc-event.rbc-event-continues-prior {
-  border-top-left-radius: 0 !important;
-  border-bottom-left-radius: 0 !important;
-}
+/* Avoid affecting global or modal text colors */
+/* Do not set global colors here; keep form/modal styles controlled by Tailwind classes in components */
 
-.trc-calendar .rbc-event.rbc-event-continues-after {
-  border-top-right-radius: 0 !important;
-  border-bottom-right-radius: 0 !important;
-}
-
-/* Upcoming Events Sidebar Scrolling */
-.trc-upcoming-events-container {
-  /* Custom scrollbar styling for webkit browsers */
-  scrollbar-width: thin;
-  scrollbar-color: #cbd5e1 #f1f5f9;
-}
-
-.trc-upcoming-events-container::-webkit-scrollbar {
-  width: 6px;
-}
-
-.trc-upcoming-events-container::-webkit-scrollbar-track {
-  background: #f1f5f9;
-  border-radius: 3px;
-}
-
-.trc-upcoming-events-container::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 3px;
-  transition: background-color 0.2s ease;
-}
-
-.trc-upcoming-events-container::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
-}
-
-/* Event card hover effects in sidebar */
-.trc-upcoming-event-card {
-  transition: all 0.2s ease;
-}
-
-.trc-upcoming-event-card:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}

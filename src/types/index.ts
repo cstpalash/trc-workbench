@@ -167,3 +167,99 @@ export enum Permission {
   CONFIGURE_WIDGETS = 'configure_widgets',
   EXPORT_DATA = 'export_data'
 }
+
+// Audit History Types
+export interface AuditRecord {
+  id: string;
+  title: string;
+  type: EventType;
+  description?: string;
+  auditDate: Date;
+  completedDate?: Date;
+  status: AuditStatus;
+  entity: EntityAssociation;
+  auditor: string; // User ID
+  findings: AuditFinding[];
+  questions: AuditQuestion[];
+  documents: AuditDocument[];
+  relatedAudits: string[]; // Array of related audit IDs
+  score?: number; // Overall audit score (0-100)
+  riskLevel: AuditRiskLevel;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface AuditFinding {
+  id: string;
+  title: string;
+  description: string;
+  severity: FindingSeverity;
+  status: FindingStatus;
+  remediation?: string;
+  dueDate?: Date;
+  assignee?: string; // User ID
+  createdAt: Date;
+}
+
+export interface AuditQuestion {
+  id: string;
+  question: string;
+  category: string;
+  answer?: string;
+  evidence?: string[];
+  score?: number;
+  notes?: string;
+  required: boolean;
+}
+
+export interface AuditDocument {
+  id: string;
+  name: string;
+  type: DocumentType;
+  url?: string;
+  size?: number;
+  uploadedBy: string; // User ID
+  uploadedAt: Date;
+  description?: string;
+}
+
+export enum AuditStatus {
+  PLANNED = 'planned',
+  IN_PROGRESS = 'in_progress',
+  COMPLETED = 'completed',
+  CANCELLED = 'cancelled',
+  DRAFT = 'draft'
+}
+
+export enum AuditRiskLevel {
+  LOW = 'low',
+  MEDIUM = 'medium',
+  HIGH = 'high',
+  CRITICAL = 'critical'
+}
+
+export enum FindingSeverity {
+  INFORMATIONAL = 'informational',
+  LOW = 'low',
+  MEDIUM = 'medium',
+  HIGH = 'high',
+  CRITICAL = 'critical'
+}
+
+export enum FindingStatus {
+  OPEN = 'open',
+  IN_PROGRESS = 'in_progress',
+  RESOLVED = 'resolved',
+  CLOSED = 'closed',
+  ACCEPTED_RISK = 'accepted_risk'
+}
+
+export enum DocumentType {
+  EVIDENCE = 'evidence',
+  POLICY = 'policy',
+  PROCEDURE = 'procedure',
+  REPORT = 'report',
+  SCREENSHOT = 'screenshot',
+  CERTIFICATE = 'certificate',
+  OTHER = 'other'
+}
