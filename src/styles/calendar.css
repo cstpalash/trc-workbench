@@ -22,6 +22,40 @@
   overflow: hidden !important;
 }
 
+/* Month view specific improvements */
+.trc-calendar .rbc-month-view table {
+  height: 100% !important;
+  table-layout: fixed !important;
+}
+
+.trc-calendar .rbc-month-view tbody {
+  height: 100% !important;
+}
+
+.trc-calendar .rbc-month-view tbody tr {
+  height: auto !important;
+  min-height: 100px !important;
+}
+
+.trc-calendar .rbc-month-view tbody td {
+  height: auto !important;
+  min-height: 100px !important;
+  vertical-align: top !important;
+  border: 1px solid #e5e7eb !important;
+  position: relative !important;
+}
+
+/* Month view header styling */
+.trc-calendar .rbc-month-view .rbc-header {
+  background-color: #f8fafc !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  color: #374151 !important;
+  text-align: center !important;
+  padding: 12px 8px !important;
+  border-bottom: 2px solid #e5e7eb !important;
+}
+
 /* Make sure the calendar content areas are scrollable within bounds */
 .trc-calendar .rbc-time-content {
   max-height: 100% !important;
@@ -134,17 +168,65 @@
 /* Today highlighting */
 .trc-calendar .rbc-today {
   background-color: #eff6ff !important;
+  border: 2px solid #3b82f6 !important;
+}
+
+/* Weekend styling for better visual organization */
+.trc-calendar .rbc-month-view .rbc-date-cell:nth-child(7n),
+.trc-calendar .rbc-month-view .rbc-date-cell:nth-child(7n+1) {
+  background-color: #fafafa !important;
 }
 
 /* Month view date styling */
 .trc-calendar .rbc-date-cell {
   text-align: right !important;
-  padding: 5px !important;
-  font-weight: 500 !important;
+  padding: 8px !important;
+  font-weight: 600 !important;
+  position: relative !important;
+  min-height: 80px !important;
+}
+
+/* Date number styling for better visibility */
+.trc-calendar .rbc-date-cell .rbc-button-link {
+  color: #1f2937 !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+  text-decoration: none !important;
+  padding: 4px 6px !important;
+  border-radius: 4px !important;
+  display: inline-block !important;
+  min-width: 24px !important;
+  text-align: center !important;
+  line-height: 1.2 !important;
+}
+
+/* Hover effect for date numbers */
+.trc-calendar .rbc-date-cell .rbc-button-link:hover {
+  background-color: #f3f4f6 !important;
+  color: #111827 !important;
+}
+
+/* Today's date styling */
+.trc-calendar .rbc-today .rbc-button-link {
+  background-color: #3b82f6 !important;
+  color: white !important;
+  font-weight: 800 !important;
+}
+
+.trc-calendar .rbc-today .rbc-button-link:hover {
+  background-color: #2563eb !important;
+  color: white !important;
 }
 
 .trc-calendar .rbc-date-cell.rbc-off-range {
   color: #9ca3af !important;
+}
+
+/* Off-range date numbers (previous/next month) */
+.trc-calendar .rbc-date-cell.rbc-off-range .rbc-button-link {
+  color: #d1d5db !important;
+  font-weight: 400 !important;
+  opacity: 0.6 !important;
 }
 
 /* Time gutter styling */
