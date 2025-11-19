@@ -1,12 +1,22 @@
 'use client';
 
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Calendar, dateFnsLocalizer, View } from 'react-big-calendar';
 import { format, parse, startOfWeek, getDay } from 'date-fns';
 import { enUS } from 'date-fns/locale/en-US';
 import { useEventsStore } from '@/stores/eventsStore';
 import { useUserStore } from '@/stores/userStore';
 import { TRCEvent, EventType, EventPriority, EventStatus, UserPersona } from '@/types';
+
+type CalendarEvent = {
+  id: string;
+  title: string;
+  start: Date;
+  end: Date;
+  allDay: boolean;
+  resource: TRCEvent;
+};
+
 import { EventModal } from './EventModal';
 import { AddEventModal } from './AddEventModal';
 import { 
@@ -97,9 +107,6 @@ export function TRCCalendarWidget({ config }: TRCCalendarWidgetProps) {
     const now = new Date();
     const endDate = new Date(now.getTime() + 60 * 60 * 1000); // 1 hour later
     
-    console.log('Add Event button - Creating event for:', now);
-    console.log('Add Event button - End date:', endDate);
-    
     setSelectedEvent({
       id: '',
       title: '',
@@ -117,27 +124,12 @@ export function TRCCalendarWidget({ config }: TRCCalendarWidgetProps) {
     setShowAddModal(true);
   };
 
-  const handleSelectEvent = React.useCallback((event: any) => {
-    console.log('Calendar event selected:', event);
-    if (event.resource) {
-      console.log('Event resource data:', event.resource);
-      setSelectedEvent(event.resource);
-      
-      if (isTrcAdmin) {
-        // TRC Admin: Open in edit mode
-        setIsEditMode(true);
-        setShowAddModal(true);
-      } else {
-        // Non-TRC Admin: Open in read-only mode
-        setShowEventModal(true);
-      }
-    }
-  }, [isTrcAdmin]);
+  const handleSelectEvent = useCallback((event: CalendarEvent) => {
+    setSelectedEvent(event.resource);
+  }, []);
 
   const handleSelectSlot = React.useCallback((slotInfo: any) => {
     if (!isTrcAdmin) return;
-    
-    console.log('Calendar slot selected:', slotInfo);
     
     const startDate = new Date(slotInfo.start);
     const endDate = new Date(slotInfo.end || slotInfo.start);
@@ -146,8 +138,6 @@ export function TRCCalendarWidget({ config }: TRCCalendarWidgetProps) {
     if (endDate.getTime() - startDate.getTime() < 60 * 60 * 1000) {
       endDate.setTime(startDate.getTime() + 60 * 60 * 1000);
     }
-    
-    console.log('Creating new event for slot - Start:', startDate, 'End:', endDate);
     
     setSelectedEvent({
       id: '',
@@ -167,12 +157,10 @@ export function TRCCalendarWidget({ config }: TRCCalendarWidgetProps) {
   }, [isTrcAdmin]);
 
   const handleNavigate = React.useCallback((newDate: Date) => {
-    console.log('Calendar navigate to:', newDate);
     setCurrentDate(newDate);
   }, []);
 
   const handleViewChange = React.useCallback((newView: View) => {
-    console.log('Calendar view change to:', newView);
     setCurrentView(newView);
   }, []);
 
@@ -226,7 +214,6 @@ export function TRCCalendarWidget({ config }: TRCCalendarWidgetProps) {
         resource: event,
       };
 
-      console.log('Calendar event created:', calendarEvent);
       return calendarEvent;
     });
   }, [isClient, filteredEvents]);
@@ -236,19 +223,16 @@ export function TRCCalendarWidget({ config }: TRCCalendarWidgetProps) {
     if (!isClient) return [];
     
     const now = new Date();
-    console.log('Computing upcoming events from date:', now);
     
     const upcoming = filteredEvents
       .filter(event => {
         const eventDate = new Date(event.startDate);
         const isUpcoming = eventDate >= now;
-        console.log(`Event ${event.title}: ${eventDate} >= ${now} = ${isUpcoming}`);
         return isUpcoming;
       })
       .sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime())
       .slice(0, 10);
     
-    console.log('Upcoming events:', upcoming);
     return upcoming;
   }, [isClient, filteredEvents]);
 
@@ -284,7 +268,6 @@ export function TRCCalendarWidget({ config }: TRCCalendarWidgetProps) {
             <button
               key={viewName}
               onClick={() => {
-                console.log('Toolbar: switching to view:', viewName);
                 onView(viewName);
               }}
               className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
@@ -379,9 +362,6 @@ export function TRCCalendarWidget({ config }: TRCCalendarWidgetProps) {
         };
     }
   };
-
-  console.log('Filtered events count:', filteredEvents.length);
-  console.log('Upcoming events count:', upcomingEvents.length);
 
   return (
     <CalendarContext.Provider value={{ handleAddEvent }}>
